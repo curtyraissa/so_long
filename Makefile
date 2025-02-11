@@ -6,7 +6,7 @@
 #    By: rcurty-g <rcurty-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/11 13:06:04 by rcurty-g          #+#    #+#              #
-#    Updated: 2025/02/11 13:36:40 by rcurty-g         ###   ########.fr        #
+#    Updated: 2025/02/11 16:43:21 by rcurty-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,37 +60,40 @@ OBJS = $(SRC:%.c=$(OBJ_DIR)/%.o)
 all: $(NAME)
 
 $(LIBFT):
-	$(MAKE) -C ./libft
+	@$(MAKE) -C ./libft
 
 $(MLX):
-	$(MAKE) -C ./minilibx-linux
+	@$(MAKE) -C ./minilibx-linux
 
 $(OBJ_DIR):
-	mkdir -p obj
+	@mkdir -p obj
 
 $(OBJ_DIR)/%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ $(BONUS_INC)
+	@$(CC) $(CFLAGS) -c $< -o $@ $(BONUS_INC)
 
 $(NAME): $(OBJ_DIR) $(OBJS) $(LIBFT) $(MLX)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME)
+	@echo "Compilation completed successfully!"
 
 clean:
-	$(MAKE) clean -C ./libft
-	$(MAKE) clean -C ./minilibx-linux
-	$(RM) $(OBJS)
+	@$(MAKE) clean -C ./libft
+	@$(MAKE) clean -C ./minilibx-linux
+	@$(RM) $(OBJS)
+	@echo "Cleanup completed."
 
 fclean: clean
-	$(MAKE) fclean -C ./libft
-	$(MAKE) clean -C ./minilibx-linux
-	$(RM) $(NAME) $(OBJ_DIR)
+	@$(MAKE) fclean -C ./libft
+	@$(MAKE) clean -C ./minilibx-linux
+	@$(RM) $(NAME) $(OBJ_DIR)
+	@echo "Everything is clean!"
 
 re: fclean all
 
 download:
 	@wget https://cdn.intra.42.fr/document/document/27195/minilibx-linux.tgz
-	echo ola
 	@tar -xzf minilibx-linux.tgz
 	@rm -rf minilibx-linux.tgz
+	@echo "MiniLibX download and extraction completed successfully!"
