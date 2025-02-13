@@ -6,52 +6,36 @@
 #    By: rcurty-g <rcurty-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/11 13:06:04 by rcurty-g          #+#    #+#              #
-#    Updated: 2025/02/11 16:43:21 by rcurty-g         ###   ########.fr        #
+#    Updated: 2025/02/13 14:16:06 by rcurty-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #==============================================================================#
-#                                    NAMES                                     #
+#                                  SETTINGS                                    #
 #==============================================================================#
-
-CC = cc
-CFLAGS = -g -Wall -Wextra -Werror
-MLXFLAGS = -L ./minilibx-linux -lmlx -lXext -lX11 -lm
-INC = -I./includes
-LIBFT = ./libft/libft.a
-MLX = ./minilibx-linux/libmlx_Linux.a
-RM = rm -rf
-
-GENERAL = main kill init
-PARSING = extension validation_1 validation_2
-MAP = utils free
-RENDER = render
-MOVEMENTS = movement_1 movement_2
 
 NAME = so_long
+CC       = cc
+CFLAGS   = -g -Wall -Wextra -Werror
+MLXFLAGS = -L ./minilibx-linux -lmlx -lXext -lX11 -lm
+INC      = -I./includes
+LIBFT    = ./libft/libft.a
+MLX      = ./minilibx-linux/libmlx_Linux.a
+RM       = rm -rf
 
 #==============================================================================#
-#                                    PATHS                                     #
+#                                   SOURCES                                    #
 #==============================================================================#
 
-VPATH += src
-VPATH += src/parsing
-VPATH += src/map
-VPATH += src/render
-VPATH += src/movements
+SRC_DIR  = src
+OBJ_DIR  = obj
 
-#==============================================================================#
-#                                    FILES                                     #
-#==============================================================================#
+SRC      = main kill init render utils free \
+           validate_extension validate_borders validate_collectibles \
+           movement_utils movement_handler
 
-SRC +=	$(addsuffix .c, $(GENERAL))
-SRC +=	$(addsuffix .c, $(PARSING))
-SRC +=	$(addsuffix .c, $(MAP))
-SRC +=	$(addsuffix .c, $(RENDER))
-SRC +=	$(addsuffix .c, $(MOVEMENTS))
-
-OBJ_DIR = obj
-OBJS = $(SRC:%.c=$(OBJ_DIR)/%.o)
+VPATH    = $(SRC_DIR) $(SRC_DIR)/parsing $(SRC_DIR)/movements
+OBJS     = $(addprefix $(OBJ_DIR)/, $(SRC:=.o))
 
 #==============================================================================#
 #                                    RULES                                     #
@@ -70,9 +54,6 @@ $(OBJ_DIR):
 
 $(OBJ_DIR)/%.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
-
-%.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@ $(BONUS_INC)
 
 $(NAME): $(OBJ_DIR) $(OBJS) $(LIBFT) $(MLX)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME)
