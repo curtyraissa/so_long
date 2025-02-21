@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcurty-g <rcurty-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raissacurty <raissacurty@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:08:01 by rcurty-g          #+#    #+#             */
-/*   Updated: 2025/02/11 16:31:44 by rcurty-g         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:35:03 by raissacurty      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// Free a 2D array of strings.
 void	ft_free_array(char **duplicate, size_t height)
 {
 	size_t	y;
@@ -30,6 +31,7 @@ void	ft_free_array(char **duplicate, size_t height)
 	free(duplicate);
 }
 
+// Free the game map from memory.
 void	ft_free_map(t_map *game)
 {
 	size_t	y;
@@ -48,6 +50,8 @@ void	ft_free_map(t_map *game)
 	free(game->map);
 }
 
+// Destroy loaded images to free memory.
+// mlx_destroy_image(): Releases memory used by an image to prevent leaks.
 void	destroy_images(t_map *game)
 {
 	if (game->floor)
@@ -62,12 +66,7 @@ void	destroy_images(t_map *game)
 		mlx_destroy_image(game->mlx_ptr, game->coffee);
 }
 
-int	ft_exit_game(t_map *game)
-{
-	ft_free_all(game);
-	exit(0);
-}
-
+// Free all allocated memory in the game structure.
 void	ft_free_all(t_map *game)
 {
 	if (!game)
@@ -87,3 +86,11 @@ void	ft_free_all(t_map *game)
 	free(game);
 	return ;
 }
+
+// Free all resources and exit the game.
+int	ft_exit_game(t_map *game)
+{
+	ft_free_all(game);
+	exit(0);
+}
+
