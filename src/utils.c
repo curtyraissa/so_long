@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcurty-g <rcurty-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raissacurty <raissacurty@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:08:11 by rcurty-g          #+#    #+#             */
-/*   Updated: 2025/02/11 16:31:47 by rcurty-g         ###   ########.fr       */
+/*   Updated: 2025/02/15 16:41:21 by raissacurty      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// Count the width of a map line by measuring characters
+// until a newline, carriage return, or null terminator is found.
 size_t	count_width(const char *str)
 {
 	size_t	i;
@@ -22,6 +24,7 @@ size_t	count_width(const char *str)
 	return (i);
 }
 
+// Count the number of lines in a map file.
 size_t	count_lines(char *file)
 {
 	size_t		lines;
@@ -43,6 +46,7 @@ size_t	count_lines(char *file)
 	return (lines);
 }
 
+// Copy the map from the file descriptor into the game structure.
 void	copy_map(int fd, t_map *game)
 {
 	int		i;
@@ -61,6 +65,7 @@ void	copy_map(int fd, t_map *game)
 	game->map[i] = NULL;
 }
 
+// Read the map file, count its dimensions, and store it in the game structure.
 void	read_map(char *file, t_map *game)
 {
 	int		fd;
