@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   kill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcurty-g <rcurty-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raissacurty <raissacurty@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:07:01 by rcurty-g          #+#    #+#             */
-/*   Updated: 2025/02/11 16:30:29 by rcurty-g         ###   ########.fr       */
+/*   Updated: 2025/02/15 12:56:54 by raissacurty      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// Handles errors, prints the corresponding message, frees memory if needed,
+// and terminates the program.
 void	ft_kill(int number, t_map *game)
 {
 	ft_printf("Error\n");
