@@ -6,12 +6,14 @@
 /*   By: rcurty-g <rcurty-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:11:16 by rcurty-g          #+#    #+#             */
-/*   Updated: 2025/02/13 11:27:12 by rcurty-g         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:52:49 by rcurty-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// Count the number of collectibles in the map.
+// If there are no collectibles, terminate the game with an error.
 void	validate_collectibles(t_map *game)
 {
 	size_t	i;
@@ -31,6 +33,8 @@ void	validate_collectibles(t_map *game)
 		ft_kill(7, game);
 }
 
+// Marks visited positions to ensure all collectibles and exit
+// are reachable from the player's starting position.
 void	ft_flood_fill(char **duplicate, t_map *game, size_t x, size_t y)
 {
 	if (x >= game->width || y >= game->height)
@@ -55,6 +59,7 @@ void	ft_flood_fill(char **duplicate, t_map *game, size_t x, size_t y)
 	ft_flood_fill(duplicate, game, x, y - 1);
 }
 
+// Validate that all collectibles and exit are reachable from the player.
 void	validate_path(t_map *game)
 {
 	char		**duplicate;

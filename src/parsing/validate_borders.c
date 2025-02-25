@@ -6,12 +6,14 @@
 /*   By: rcurty-g <rcurty-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:10:41 by rcurty-g          #+#    #+#             */
-/*   Updated: 2025/02/13 11:28:17 by rcurty-g         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:02:53 by rcurty-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// Validate that the map is surrounded by walls ('1').
+// If the borders are not correctly enclosed, the game will terminate.
 void	validate_boarders(t_map *game)
 {
 	size_t	i;
@@ -35,6 +37,8 @@ void	validate_boarders(t_map *game)
 	}
 }
 
+// Validate that the map has a consistent width in all rows.
+// ensure the map size is within the minimum required dimensions.
 void	validate_size(t_map *game)
 {
 	size_t	i;
@@ -50,6 +54,8 @@ void	validate_size(t_map *game)
 	}
 }
 
+// Validate that the map contains exactly one player ('P') and one exit ('E').
+// If the player or exit count is incorrect, terminate the game.
 void	validate_assets(t_map *game)
 {
 	size_t	i;
@@ -78,6 +84,9 @@ void	validate_assets(t_map *game)
 		ft_kill(6, game);
 }
 
+// Validate that the map contains only allowed elements:
+// '1' for walls, '0' for empty space, 'P' for player,
+// 'E' for exit, and 'C' for collectibles.
 void	validate_elements(t_map *game)
 {
 	size_t	i;
@@ -99,6 +108,7 @@ void	validate_elements(t_map *game)
 	}
 }
 
+// Validate the entire map by calling all validation functions.
 void	validate_map(t_map *game)
 {
 	validate_boarders(game);

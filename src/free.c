@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raissacurty <raissacurty@student.42.fr>    +#+  +:+       +#+        */
+/*   By: rcurty-g <rcurty-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:08:01 by rcurty-g          #+#    #+#             */
-/*   Updated: 2025/02/19 11:35:03 by raissacurty      ###   ########.fr       */
+/*   Updated: 2025/02/25 13:40:45 by rcurty-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// Free a 2D array of strings.
+// Free a array of strings.
 void	ft_free_array(char **duplicate, size_t height)
 {
 	size_t	y;
@@ -93,4 +93,3 @@ int	ft_exit_game(t_map *game)
 	ft_free_all(game);
 	exit(0);
 }
-
