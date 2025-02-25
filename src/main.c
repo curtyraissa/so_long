@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcurty-g <rcurty-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raissacurty <raissacurty@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:07:09 by rcurty-g          #+#    #+#             */
-/*   Updated: 2025/02/11 16:30:32 by rcurty-g         ###   ########.fr       */
+/*   Updated: 2025/02/15 16:41:53 by raissacurty      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// opens the map file, initializes the game, and starts rendering.
 int	main(int argc, char **argv)
 {
 	int		fd;
