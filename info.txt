@@ -1,4 +1,4 @@
-so_long.h
+          so_long.h
 estrutura t_point usada para armazenar coordenadas x e y no mapa.
   
 estrutura t_image armazena dados sobre as imagens carregadas na MiniLibX -> usada em t_map para armazenar uma imagem do jogo 
@@ -26,3 +26,89 @@ wall	Ponteiro para a imagem das paredes (1).
 mlx_ptr	Ponteiro para a conexão da MiniLibX.
 win_ptr	Ponteiro para a janela criada pela MiniLibX.
 image	Estrutura t_image para armazenar informações da imagem atual.
+
+          init.c
+- init_game -> inicializa a estrutura zerando o valor das variaveis principais
+- init -> Aloca memória para a estrutura do jogo e inicializa o MiniLibX
+
+      utils.c
+- count_width -> Conta a largura de uma linha do mapa, até encontrar uma quebra de linha ou o fim da string.
+- count_lines -> Conta o número de linhas em um arquivo de mapa.
+- copy_map -> Copia o conteúdo do mapa do arquivo para a estrutura do jogo.
+- read_map -> Lê o arquivo do mapa, conta suas dimensões e armazena na estrutura do jogo.
+
+          free.c
+- free_array -> Libera um array de strings da memória. 
+    Se o array estiver vazio, libera apenas o próprio array. 
+    se nao, Libera cada string dentro do array e libera o proprio array.
+- free_map -> Libera o mapa do jogo da memória.
+    Se o mapa estiver vazio, libera apenas o array de mapas.
+    se nao, Libera cada linha do mapa. e Libera o array do mapa.
+- destroy_images -> Destroi as imagens carregadas para liberar memória.
+    mlx_destroy_image(): Libera a memória usada por uma imagem para evitar vazamentos.
+- free_all -> Libera toda a memória alocada na estrutura do jogo.
+- exit_game -> Libera todos os recursos e encerra o jogo.
+
+          render.c
+- create_sprites -> Carrega as texturas do jogo na memória.
+  mlx_xpm_file_to_image(): Converte um arquivo de imagem `.xpm` em um ponteiro de imagem.
+- open_window -> Cria a janela do jogo e inicializa o buffer de imagem.
+  mlx_new_window(): Cria uma nova janela gráfica.
+  mlx_new_image(): Cria uma imagem vazia para renderização.
+  mlx_get_data_addr(): Obtém dados da imagem (formato de cores, layout de pixels).
+    Verifica se o ponteiro da MiniLibX foi inicializado corretamente.
+    Cria a janela do jogo com base nas dimensões do mapa.
+    Verifica se a criação da janela foi bem-sucedida.
+    Cria uma nova imagem para armazenar o buffer de renderização.
+    Obtém os dados da imagem criada (endereço da memória, bits por pixel, etc.)
+- render_map -> Percorre a matriz do mapa e chama `render_image()` para desenhar cada elemento.
+- render_image -> Renderiza um objeto específico do jogo com base no caractere do mapa.
+  mlx_put_image_to_window(): Desenha uma imagem na posição (x, y) da janela.
+- render -> Inicializa a renderização do jogo, cria a janela e configura eventos.
+  mlx_hook(): Associa eventos de teclado e fechamento da janela a funções.
+  mlx_loop(): Inicia o loop de eventos da MiniLibX, mantendo a janela ativa.
+
+          parsing
+- check_extension - > verifica se a extensao do arquivo do mapa e .ber
+- cheack_collectibles -> conta o numero total de coletaveis e caso nao tenha, o jogo e encerrado com erro.
+- flood_fill -> Marca as posições visitadas para garantir que todos os colecionáveis e a saída sejam alcançáveis a partir da posição inicial do jogador.
+    Verifica se a posição está fora dos limites do mapa.
+    Se encontrar um coletável, marca como coletado
+    F (Marca a posição como visitada)
+    Se for parede ou já visitado, return;
+    Se encontrar a saída, marca que é acessível
+    Chama a função recursivamente para os quatro lados (direita, baixo, esquerda, cima)
+- validate_path -> Valida se todos os colecionáveis e a saída são acessíveis a partir da posição inicial do jogador.
+    Cria uma cópia do mapa para ser utilizada na validação
+    Copia cada linha do mapa original para a cópia
+    Inicia a verificação de acessibilidade a partir da posição do jogador usando flood_fill
+    Se nem todos os colecionáveis forem coletáveis ou a saída não for acessível, encerra o jogo
+    Libera a memória utilizada pela cópia do mapa
+- validate_borders -> Verifica se o mapa está cercado por paredes ('1') em todas as bordas. (primeira e ultima linhas e colunas)
+- validate_size -> verifica as larguras das linhas e se o mapa tem um tamanho minimo para ser jogavel.
+- validate_assets -> Verifica se o mapa contém exatamente um jogador ('P') e uma saída ('E').
+- validate_elements -> Verifica se o mapa contém apenas elementos permitidos.
+- validate_map -> Valida todo o mapa chamando todas as funções de validação.
+
+          moviments
+- check_win -> Verifica se o jogador coletou todos os colecionáveis e, se sim, finaliza o jogo.
+- validate_move_up_down -> Valida os movimentos para cima e para baixo.
+- validate_move_left_right -> Valida os movimentos para a esquerda e para a direita
+    Se o próximo espaço for uma parede, não permite o movimento
+    Se o próximo espaço for a saída, mas ainda há colecionáveis, não permite sair
+- key_press -> Lida com a entrada do teclado e chama a função apropriada para movimentação.
+    Se pressionar ESC, fecha o jogo
+    Se for um movimento vertical, chama a função correspondente
+    Se for um movimento horizontal, chama a função correspondente
+
+- move_up, move_down, move_left, move_right realizam os movimentos do jogador e atualizam o mapa.
+    Se o jogador encontrar um colecionável ('C'), ele o coleta e avança.
+      Move o jogador para a nova posição
+      Deixa a posição anterior vazia
+      Atualiza a posição do jogador no mapa
+      Diminui a contagem de colecionáveis restantes
+    Se o jogador encontrar a saída ('E'), verifica se pode finalizar o jogo.
+    Chama a função check_win que verifica se todos os colecionáveis foram coletados
+    Caso contrário, move o jogador normalmente
+    Atualiza o mapa para refletir o movimento
+    
