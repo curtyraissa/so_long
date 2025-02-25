@@ -1,0 +1,28 @@
+so_long.h
+estrutura t_point usada para armazenar coordenadas x e y no mapa.
+  
+estrutura t_image armazena dados sobre as imagens carregadas na MiniLibX -> usada em t_map para armazenar uma imagem do jogo 
+img	Ponteiro para a imagem criada pela MiniLibX.
+addr	Endereço da memória onde a imagem está armazenada.
+bits_per_pixel	Número de bits usados para representar um pixel (exemplo: 32 bits para cores RGBA).
+line_length	Número de bytes por linha da imagem na memória.
+endian	Define se os bytes da cor são armazenados no formato big-endian ou little-endian.
+
+estrutura t_map armazena todas as informacoes do jogo
+width	Largura do mapa (número de colunas).
+height	Altura do mapa (número de linhas).
+collectibles	Número total de itens colecionáveis (C) no mapa.
+gathered	Quantidade de colecionáveis já coletados pelo jogador.
+map	Ponteiro para uma matriz de caracteres representando o mapa (char **map).
+exit_check	Indica se a saída (E) é acessível (1 para sim, 0 para não).
+movement	Contador de movimentos do jogador.
+player	Ponteiro para a imagem do jogador (P).
+player_pos	Estrutura t_point contendo a posição do jogador (x, y).
+exit	Ponteiro para a imagem da saída (E).
+exit_pos	Estrutura t_point contendo a posição da saída (x, y).
+floor	Ponteiro para a imagem do chão (0).
+coffee	Ponteiro para a imagem dos colecionáveis (C).
+wall	Ponteiro para a imagem das paredes (1).
+mlx_ptr	Ponteiro para a conexão da MiniLibX.
+win_ptr	Ponteiro para a janela criada pela MiniLibX.
+image	Estrutura t_image para armazenar informações da imagem atual.
