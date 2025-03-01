@@ -48,3 +48,11 @@ make fclean
 ---
 
 ## 💬 &nbsp;Contacts
+<img align="left" src="https://avatars.githubusercontent.com/curtyraissa?size=100">
+
+Made by [Raissa Curty](https://github.com/curtyraissa)!
+
+<a href="https://www.linkedin.com/in/raissa-curty/" target="_blank">
+    <img style="border-radius:50%;" src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/linkedin/default.svg" width="52" height="40" alt="linkedin logo"  />
+</a>&nbsp;
+
