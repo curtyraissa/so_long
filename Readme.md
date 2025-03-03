@@ -1,5 +1,10 @@
 # So Long
 
+<p align="center">
+  <img src="https://github.com/curtyraissa/so_long/blob/main/so_long.gif" alt="So Long">
+</p>
+
+
 ## 🌟 Project Overview
 **So Long** is a small-scale 2D game project that serves as an introduction to computer graphics using the MiniLibX library. This project focuses on creating a basic game environment, handling events, and managing graphics, teaching fundamental concepts like window management, event handling, and texture usage.
 
