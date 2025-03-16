@@ -19,8 +19,8 @@
 
 1. **Clone the repository:**
    ```bash
-   git clone <repository URL>
-   cd <repository_name>
+   git clone https://github.com/curtyraissa/so_long.git
+   cd so_long
    ```
 
 2. **Compile the project:**
